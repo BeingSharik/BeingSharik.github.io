@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharik Mahmud | Portfolio</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Warm Earthy/Dark Theme matching the reference images */
+            --bg-main: #2b2a28;        /* Dark brownish grey */
+            --bg-card: #33312f;        /* Slightly lighter card background */
+            --bg-input: #3a3836;       /* Input fields */
+            --accent-primary: #d1bfae; /* Champagne/Beige accent */
+            --accent-hover: #e3d3c4;   /* Lighter beige for hover */
+            --text-main: #f0ece6;      /* Off-white text */
+            --text-muted: #a8a39d;     /* Muted greyish text */
+            --border-color: rgba(209, 191, 174, 0.15); /* Subtle beige borders */
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Ambient Glow & Floating Particles (Matching Image 1) */
+        .ambient-glow {
+            position: fixed;
+            top: -20%;
+            right: -10%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(209, 191, 174, 0.05) 0%, transparent 60%);
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+
+        .p1 { width: 5px; height: 5px; top: 35%; right: 35%; animation: float 6s infinite ease-in-out; }
+        .p2 { width: 3px; height: 3px; top: 60%; right: 15%; animation: float 8s infinite ease-in-out reverse; }
+        .p3 { width: 7px; height: 7px; top: 25%; right: 10%; animation: float 7s infinite ease-in-out 1s; opacity: 0.2; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            background: rgba(43, 42, 40, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 0.4rem;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-main);
+        }
+
+        section {
+            padding: 6rem 8%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-main);
+            position: relative;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .section-header i {
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -12px;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-primary);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            padding-top: 8rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+        }
+        
+        .hero-subtitle-2 {
+            font-size: 1.05rem;
+            color: var(--bg-main);
+            background-color: var(--accent-primary);
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        .hero-content p.desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+            max-width: 90%;
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            background: var(--bg-card);
+            color: var(--text-muted);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+
+        .social-icons a:hover {
+            background: var(--accent-primary);
+            color: var(--bg-main);
+            transform: translateY(-3px);
+        }
+
+        /* Circular Hero Image Profile (Matching Image 1) */
+        .hero-image-wrapper {
+            position: relative;
+            padding: 2.5rem;
+            border-radius: 50%;
+            border: 1px solid rgba(209, 191, 174, 0.4);
+            box-shadow: 0 0 50px rgba(209, 191, 174, 0.08);
+            z-index: 2;
+        }
+
+        .hero-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 1rem; left: 1rem; right: 1rem; bottom: 1rem;
+            border: 1px solid rgba(209, 191, 174, 0.15);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .hero-image {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        /* About Section */
+        .about-text {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 900px;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Achievements & Education Vertical Stack */
+        .edu-achieve-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .list-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* Timeline/Card Style */
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.8rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .edu-card:hover {
+            border-color: rgba(209, 191, 174, 0.3);
+        }
+
+        .edu-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .edu-card h3 {
+            font-size: 1.15rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .edu-card p.institute {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .edu-card ul {
+            list-style-type: disc;
+            margin-left: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .date-pill {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--accent-primary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Achievement Card */
+        .achieve-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+        
+        .achieve-card:hover {
+            border-color: rgba(209, 191, 174, 0.3);
+        }
+
+        .achieve-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .achieve-header h3 {
+            font-size: 1.2rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .achieve-header p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+
+        .champion-pill {
+            background: rgba(209, 191, 174, 0.1);
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .achieve-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .achieve-details p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .achieve-details p i {
+            color: var(--accent-primary);
+            width: 15px;
+            text-align: center;
+        }
+
+        .achieve-details strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        /* Dynamic Skills Section */
+        .tech-expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+        
+        .skill-box:hover {
+            border-color: rgba(209, 191, 174, 0.4);
+        }
+
+        .skill-box-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .skill-icon-bg {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .skill-box-title h3 {
+            font-size: 1.05rem;
+            color: var(--text-main);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .skill-box-title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .skill-progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .skill-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .skill-labels .level {
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        .progress-bar-bg {
+            background: rgba(209, 191, 174, 0.15);
+            height: 4px;
+            border-radius: 2px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--accent-primary);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 1s ease-in-out;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Skill Distribution */
+        .skill-distribution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .dist-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .dist-chart {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+
+        .dist-chart svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .circle-bg {
+            fill: none;
+            stroke: rgba(209, 191, 174, 0.1);
+            stroke-width: 2.5;
+        }
+
+        .circle-fill {
+            fill: none;
+            stroke: var(--accent-primary);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-dasharray: 100, 100;
+            stroke-dashoffset: 100;
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+
+        .dist-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .dist-info h4 {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+
+        .dist-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Goals Section */
+        .goals-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .goal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+        
+        .goal-card:hover {
+            border-color: rgba(209, 191, 174, 0.3);
+        }
+
+        .goal-card h3 {
+            color: var(--text-main);
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        
+        .goal-card h3 i {
+            color: var(--accent-primary);
+        }
+
+        .goal-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .contact-intro {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+            margin-top: 0.2rem;
+        }
+
+        .contact-item h4 {
+            color: var(--text-main);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--accent-primary);
+        }
+
+        .contact-form button {
+            background: var(--accent-primary);
+            color: var(--bg-main);
+            border: none;
+            padding: 1.2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 0.5rem;
+        }
+
+        .contact-form button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 8%;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            #hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 2rem;
+            }
+            .hero-content { align-items: center; }
+            .hero-content h1 { justify-content: center; font-size: 2.2rem; white-space: normal; flex-wrap: wrap;}
+            .hero-content p.desc { max-width: 100%; }
+            .tech-expertise-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .social-icons { justify-content: center; }
+            
+            nav {
+                justify-content: center;
+            }
+            .logo { display: none; }
+        }
+        
+        @media (max-width: 500px) {
+            .nav-links a span { display: none; } /* Hide text on very small screens, keep icons */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow"></div>
+    <div class="particles">
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">SHARIK MAHMUD</a>
+        <ul class="nav-links">
+            <li><a href="#hero"><i class="fas fa-home"></i> <span>HOME</span></a></li>
+            <li><a href="#about"><i class="fas fa-user"></i> <span>ABOUT</span></a></li>
+            <li><a href="#skills"><i class="fas fa-wrench"></i> <span>SKILLS</span></a></li>
+            <li><a href="#vision"><i class="fas fa-eye"></i> <span>VISION</span></a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> <span>CONTACT</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm Sharik Mahmud <span style="display:inline-block; animation: wave 2s infinite transform-origin: 70% 70%;"></span></h1>
+            <p class="hero-subtitle">Computer Science Student @ Independent University, Bangladesh (IUB)</p>
+            <p class="hero-subtitle-2">Aspiring to become a Data Engineer and AI Systems Developer</p>
+            <p class="desc">Exploring AI, Data Science, and Machine Learning. Passionate about building real-world projects and pushing limits—BE EXCEPTIONAL.</p>
+            
+            <div class="social-icons">
+                <a href="https://github.com/BeingSharik" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/beingsharik/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://discord.gg/SQuqGW9pb8" target="_blank"><i class="fab fa-discord"></i></a>
+                <a href="https://www.facebook.com/itz.sharikmahmud" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/sharik_mahmud/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        
+        <div class="hero-image-wrapper">
+            <img src="Sharik.jpg" alt="Sharik Mahmud" class="hero-image">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-header"><i class="fas fa-address-card"></i> ABOUT ME</h2>
+        <div class="about-text">
+            <p>I'm a Computer Science student at Independent University, Bangladesh (IUB), driven by a simple core standard: <strong>BE EXCEPTIONAL</strong>.</p>
+            <p>I'm focusing on building strong knowledge in CS fundamentals, deepening my understanding of programming languages, and building real-world projects that solve actual problems. Long-term, I’m working toward building intelligent AI systems as a Data Scientist and eventually launching my own tech startup.</p>
+            <p>Outside of code and algorithms, you’ll find me organizing esports events, playing Valorant, hitting the gym, or working on video editing.</p>
+        </div>
+    </section>
+
+    <!-- Achievements & Education Vertical Stack -->
+    <section id="background">
+        <div class="edu-achieve-container">
+            
+            <!-- Education Stack -->
+            <div>
+                <h2 class="section-header"><i class="fas fa-graduation-cap"></i> EDUCATION</h2>
+                <div class="list-stack">
+                    <div class="edu-card">
+                        <div class="edu-card-header">
+                            <div>
+                                <h3>B.Sc. in Computer Science</h3>
+                                <p class="institute">Independent University, Bangladesh (IUB)</p>
+                            </div>
+                            <span class="date-pill">2026 – Present</span>
+                        </div>
+                        <ul>
+                            <li>Session: Autumn 2026</li>
+                        </ul>
+                    </div>
+
+                    <div class="edu-card">
+                        <div class="edu-card-header">
+                            <div>
+                                <h3>Higher Secondary Certificate (HSC)</h3>
+                                <p class="institute">Mirpur Cantonment Public School and College</p>
+                            </div>
+                            <span class="date-pill">Passing Year: 2025</span>
+                        </div>
+                        <ul>
+                            <li>Group: Science</li>
+                        </ul>
+                    </div>
+
+                    <div class="edu-card">
+                        <div class="edu-card-header">
+                            <div>
+                                <h3>Secondary School Certificate (SSC)</h3>
+                                <p class="institute">Mirpur Cantonment Public School and College</p>
+                            </div>
+                            <span class="date-pill">Passing Year: 2023</span>
+                        </div>
+                        <ul>
+                            <li>Group: Science</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Achievements Stack -->
+            <div>
+                <h2 class="section-header"><i class="fas fa-trophy"></i> ACHIEVEMENTS</h2>
+                <div class="list-stack">
+                    <div class="achieve-card">
+                        <div class="achieve-header">
+                            <div>
+                                <h3>MAGNEQ 2.0</h3>
+                                <p>The 2nd MCPSC Intra Science Festival - 2022</p>
+                            </div>
+                            <span class="champion-pill">CHAMPION</span>
+                        </div>
+                        <div class="achieve-details">
+                            <p><i class="fas fa-star"></i> <strong>Award:</strong> Secured 1st Place Winner</p>
+                            <p><i class="fas fa-wrench"></i> <strong>Segment:</strong> MAKE-A-THON</p>
+                            <p><i class="fas fa-users"></i> <strong>Organizer:</strong> MCPSC Science Club</p>
+                            <p><i class="fas fa-calendar-alt"></i> <strong>Date:</strong> 16–17th September 2022</p>
+                            <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> MCPSC Premises</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-header"><i class="fas fa-laptop-code"></i> TECHNICAL EXPERTISE</h2>
+        
+        <div class="tech-expertise-grid">
+            
+            <div class="skill-box" data-percent="15" data-dist-id="dist-prog">
+                <div class="skill-box-header">
+                    <div class="skill-icon-bg"><i class="fas fa-code"></i></div>
+                    <div class="skill-box-title">
+                        <h3>Programming Language</h3>
+                        <p>Core software development and algorithmic logic</p>
+                    </div>
+                </div>
+                <div class="skill-progress-container">
+                    <div class="skill-labels">
+                        <span>Proficiency</span>
+                        <span class="level dynamic-level">...</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">HTML</span>
+                </div>
+            </div>
+
+            <div class="skill-box" data-percent="18" data-dist-id="dist-tools">
+                <div class="skill-box-header">
+                    <div class="skill-icon-bg"><i class="fas fa-wrench"></i></div>
+                    <div class="skill-box-title">
+                        <h3>Tools</h3>
+                        <p>Development environments and operating systems</p>
+                    </div>
+                </div>
+                <div class="skill-progress-container">
+                    <div class="skill-labels">
+                        <span>Proficiency</span>
+                        <span class="level dynamic-level">...</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">PyCharm</span>
+                    <span class="skill-tag">Linux</span>
+                </div>
+            </div>
+
+            <div class="skill-box" data-percent="35" data-dist-id="dist-edit">
+                <div class="skill-box-header">
+                    <div class="skill-icon-bg"><i class="fas fa-video"></i></div>
+                    <div class="skill-box-title">
+                        <h3>Editing</h3>
+                        <p>Media post-production, visual effects, and graphic design</p>
+                    </div>
+                </div>
+                <div class="skill-progress-container">
+                    <div class="skill-labels">
+                        <span>Proficiency</span>
+                        <span class="level dynamic-level">...</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Premiere Pro</span>
+                    <span class="skill-tag">After Effects</span>
+                    <span class="skill-tag">Photoshop</span>
+                </div>
+            </div>
+
+            <div class="skill-box" data-percent="50" data-dist-id="dist-mgmt">
+                <div class="skill-box-header">
+                    <div class="skill-icon-bg"><i class="fas fa-user-tie"></i></div>
+                    <div class="skill-box-title">
+                        <h3>Management & Strategy</h3>
+                        <p>Tournament operations and project coordination</p>
+                    </div>
+                </div>
+                <div class="skill-progress-container">
+                    <div class="skill-labels">
+                        <span>Proficiency</span>
+                        <span class="level dynamic-level">...</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Esports Operations</span>
+                    <span class="skill-tag">Project Management</span>
+                </div>
+            </div>
+            
+        </div>
+
+        <h3 style="margin-top: 4rem; font-size: 1.5rem; color: var(--text-main); text-transform: uppercase;">SKILL DISTRIBUTION</h3>
+        <div style="width: 40px; height: 3px; background: var(--accent-primary); margin-top: 5px; border-radius: 2px;"></div>
+        
+        <div class="skill-distribution-card">
+            <div class="dist-item">
+                <div class="dist-chart">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="circle-bg" cx="18" cy="18" r="15.9155"></circle>
+                        <circle class="circle-fill" id="dist-prog-svg" cx="18" cy="18" r="15.9155"></circle>
+                    </svg>
+                    <i class="fas fa-code dist-icon"></i>
+                </div>
+                <div class="dist-info">
+                    <h4>Programming Language</h4>
+                    <p id="dist-prog-text">...</p>
+                </div>
+            </div>
+
+            <div class="dist-item">
+                <div class="dist-chart">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="circle-bg" cx="18" cy="18" r="15.9155"></circle>
+                        <circle class="circle-fill" id="dist-tools-svg" cx="18" cy="18" r="15.9155"></circle>
+                    </svg>
+                    <i class="fas fa-wrench dist-icon"></i>
+                </div>
+                <div class="dist-info">
+                    <h4>Tools</h4>
+                    <p id="dist-tools-text">...</p>
+                </div>
+            </div>
+
+            <div class="dist-item">
+                <div class="dist-chart">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="circle-bg" cx="18" cy="18" r="15.9155"></circle>
+                        <circle class="circle-fill" id="dist-edit-svg" cx="18" cy="18" r="15.9155"></circle>
+                    </svg>
+                    <i class="fas fa-video dist-icon"></i>
+                </div>
+                <div class="dist-info">
+                    <h4>Editing</h4>
+                    <p id="dist-edit-text">...</p>
+                </div>
+            </div>
+
+            <div class="dist-item">
+                <div class="dist-chart">
+                    <svg viewBox="0 0 36 36">
+                        <circle class="circle-bg" cx="18" cy="18" r="15.9155"></circle>
+                        <circle class="circle-fill" id="dist-mgmt-svg" cx="18" cy="18" r="15.9155"></circle>
+                    </svg>
+                    <i class="fas fa-user-tie dist-icon"></i>
+                </div>
+                <div class="dist-info">
+                    <h4>Management & Strategy</h4>
+                    <p id="dist-mgmt-text">...</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision">
+        <h2 class="section-header"><i class="fas fa-rocket"></i> GOALS & VISION</h2>
+        <div class="goals-container">
+            <div class="goal-card">
+                <h3><i class="fas fa-bullseye"></i> Short-Term Goals (1–2 Years)</h3>
+                <p>Master core Computer Science fundamentals, programming languages, Data Structures & Algorithms, and database systems while building real-world self-directed projects that solve actual problems.</p>
+            </div>
+            <div class="goal-card">
+                <h3><i class="fas fa-space-shuttle"></i> Long-Term Mission</h3>
+                <p>Become a Data Scientist focused on developing intelligent AI models and autonomous agents. My ultimate career goal is to launch my own tech startup creating impactful software solutions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-header"><i class="fas fa-paper-plane"></i> GET IN TOUCH</h2>
+        <div class="contact-grid">
+            <div>
+                <p class="contact-intro">Have a project in mind, an esports event to collaborate on, or just want to connect? Drop a message below or reach out directly!</p>
+                
+                <div class="contact-info-list">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>sharikmahmud.social@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Dhaka, Bangladesh</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-user-check"></i>
+                        <div>
+                            <h4>Status</h4>
+                            <p>Open for collaborations, networking, & tech projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <form class="contact-form" action="https://formspree.io/f/xqpzbjzj" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email Address" required>
+                <input type="text" name="subject" placeholder="Subject" required>
+                <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="mono">Designed & Built By <strong>Sharik Mahmud</strong></p>
+        <p>© 2026 Sharik Mahmud. All rights reserved.</p>
+    </footer>
+
+    <!-- Script for Dynamic Skill Levels -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillBoxes = document.querySelectorAll('.skill-box');
+            
+            skillBoxes.forEach(box => {
+                const percent = parseInt(box.getAttribute('data-percent'));
+                
+                let levelText = '';
+                if(percent <= 20) {
+                    levelText = 'Basic';
+                } else if(percent <= 40) {
+                    levelText = 'Intermediate';
+                } else if(percent <= 75) {
+                    levelText = 'Advanced';
+                } else {
+                    levelText = 'Expert';
+                }
+
+                const fillBar = box.querySelector('.progress-bar-fill');
+                const levelSpan = box.querySelector('.dynamic-level');
+                
+                setTimeout(() => {
+                    fillBar.style.width = percent + '%';
+                }, 300);
+                levelSpan.textContent = levelText;
+
+                const distId = box.getAttribute('data-dist-id');
+                if(distId) {
+                    const svgCircle = document.getElementById(distId + '-svg');
+                    const textLabel = document.getElementById(distId + '-text');
+                    
+                    if(svgCircle && textLabel) {
+                        textLabel.textContent = levelText;
+                        setTimeout(() => {
+                            svgCircle.style.strokeDashoffset = 100 - percent;
+                        }, 300);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
